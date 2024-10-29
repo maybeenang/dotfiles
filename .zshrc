@@ -60,8 +60,9 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias grep='grep --color=auto'
 alias so='source'
 alias ls='exa --icons'
-alias ll='exa -l --icons'
+alias ll='exa -la --icons'
 alias sedit='sudoedit'
+alias so='source ~/.zshrc'
 
 # ------------------------------------------
 # export
