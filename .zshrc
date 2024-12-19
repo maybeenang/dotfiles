@@ -14,6 +14,7 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
+
 # Add in powelevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
@@ -49,6 +50,10 @@ setopt hist_ignore_space
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 
+# keybind
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
@@ -63,18 +68,24 @@ alias ls='exa --icons'
 alias ll='exa -la --icons'
 alias sedit='sudoedit'
 alias so='source ~/.zshrc'
+alias phpa='php artisan'
 
 # ------------------------------------------
 # export
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-export SUDO_EDITOR=nvim # Set name of the theme to load --- if set to "random", it will
+export SUDO_EDITOR=nvim 
 
 export PATH=$PATH:/home/maybeenang/.spicetify
+
+# composer path
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
 # shell integration
 #
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+
+# welcome message
 
 # fnm
 FNM_PATH="/home/maybeenang/.local/share/fnm"
