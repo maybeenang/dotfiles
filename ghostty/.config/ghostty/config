@@ -1,0 +1,4 @@
+theme = catppuccin-mocha
+shell-integration = zsh
+window-decoration = true
+gtk-titlebar = false

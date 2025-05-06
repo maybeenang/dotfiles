@@ -1,9 +1,5 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/maybeenang/.zsh/completions:"* ]]; then export FPATH="/home/maybeenang/.zsh/completions:$FPATH"; fi
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -14,9 +10,6 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
-
-# Add in powelevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -35,9 +28,6 @@ zinit snippet OMZP::command-not-found
 autoload -U compinit && compinit
 
 zinit cdreplay -q
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # history
 HISTFILE=~/.zsh_history
@@ -69,6 +59,7 @@ alias ll='exa -la --icons'
 alias sedit='sudoedit'
 alias so='source ~/.zshrc'
 alias phpa='php artisan'
+alias vi='nvim'
 
 # ------------------------------------------
 # export
@@ -79,6 +70,16 @@ export PATH=$PATH:/home/maybeenang/.spicetify
 
 # composer path
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+
+# java path
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export PATH=$JAVA_HOME/bin:$PATH
+
+# android path
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 
 # shell integration
 #
@@ -98,3 +99,9 @@ fi
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+#deno
+. "/home/maybeenang/.deno/env"
+
+#starship
+eval "$(starship init zsh)"
