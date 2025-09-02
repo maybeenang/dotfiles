@@ -82,6 +82,11 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 
+# GOLANG
+export PATH=$PATH:/usr/local/go/bin
+export GOBIN=$HOME/go/bin
+export PATH="$PATH:$GOBIN"
+
 # shell integration
 #
 eval "$(fzf --zsh)"
@@ -113,3 +118,27 @@ if [ -d "$FNM_PATH" ]; then
   export PATH="/home/maybeenang/.local/share/fnm:$PATH"
   eval "`fnm env`"
 fi
+
+# flutter
+# I want to use $@ for all arguments but they don't contain space for me
+function fw() {
+  tmux send-keys "flutter run $1 $2 $3 $4 --pid-file=/tmp/tf1.pid" Enter \;\
+  split-window -p 10 \;\
+  send-keys 'npx -y nodemon -e dart -x "cat /tmp/tf1.pid | xargs kill -s USR1"' Enter \;\
+  select-pane -t 0 \;
+}
+
+function adb-screenshot() {
+ adb exec-out screencap -p > /tmp/screenshot.png && xdg-open /tmp/screenshot.png
+}
+
+export NVS_HOME="$HOME/.nvs"
+[ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
+
+# pnpm
+export PNPM_HOME="/home/maybeenang/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

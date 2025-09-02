@@ -1,4 +1,5 @@
 theme = catppuccin-mocha
 shell-integration = zsh
 window-decoration = true
+window-padding-x = 32,4
 gtk-titlebar = false
