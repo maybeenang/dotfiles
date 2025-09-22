@@ -98,6 +98,9 @@ export PATH=$PATH:/usr/local/go/bin
 export GOBIN=$HOME/go/bin
 export PATH="$PATH:$GOBIN"
 
+# dart flutter 
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
 # shell integration
 #
 eval "$(fzf --zsh)"
@@ -141,6 +144,10 @@ function fw() {
 
 function adb-screenshot() {
  adb exec-out screencap -p > /tmp/screenshot.png && xdg-open /tmp/screenshot.png
+}
+
+function build-runner() {
+  flutter pub run build_runner build --delete-conflicting-outputs
 }
 
 export NVS_HOME="$HOME/.nvs"
